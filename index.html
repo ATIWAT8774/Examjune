@@ -63,14 +63,14 @@
         </div>
 
         <div class="flex mb-4 border-b border-gray-200">
-            <button id="tab-day1" class="px-4 py-2 font-medium text-orange-600 border-b-2 border-orange-500">27 มิถุนายน 2568</button>
-            <button id="tab-day2" class="px-4 py-2 font-medium text-gray-500 hover:text-orange-500">30 มิถุนายน 2568</button>
+            <button id="tab-day1" class="px-4 py-2 font-medium text-gray-500 hover:text-orange-500">27 มิถุนายน ค.ศ. 2025</button>
+            <button id="tab-day2" class="px-4 py-2 font-medium text-orange-600 border-b-2 border-orange-500">30 มิถุนายน ค.ศ. 2025</button>
         </div>
 
-        <div id="day1-content" class="exam-container">
+        <div id="day1-content" class="exam-container hidden">
             <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                 <div class="bg-orange-500 text-white px-6 py-3 font-medium text-lg">
-                    วันพฤหัสบดีที่ 27 มิถุนายน 2568
+                    วันพฤหัสบดีที่ 27 มิถุนายน ค.ศ. 2025
                 </div>
                 <div class="divide-y divide-gray-100">
                     <div class="exam-item p-4 hover:bg-orange-50" data-start="08:30" data-end="09:00">
@@ -130,10 +130,10 @@
             </div>
         </div>
 
-        <div id="day2-content" class="exam-container hidden">
+        <div id="day2-content" class="exam-container">
             <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                 <div class="bg-orange-500 text-white px-6 py-3 font-medium text-lg">
-                    วันอาทิตย์ที่ 30 มิถุนายน 2568
+                    วันจันทร์ที่ 30 มิถุนายน ค.ศ. 2025
                 </div>
                 <div class="divide-y divide-gray-100">
                     <div class="exam-item p-4 hover:bg-orange-50" data-start="08:30" data-end="09:00">
@@ -226,8 +226,9 @@
         // Date and time functions
         function updateDateTime() {
             const now = new Date();
+            // Display date using C.E. year
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('current-date').textContent = now.toLocaleDateString('th-TH', options);
+            document.getElementById('current-date').textContent = now.toLocaleDateString('th-TH', options).replace('พ.ศ.', 'ค.ศ.'); // Replace B.E. with C.E.
             
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
@@ -239,7 +240,7 @@
 
         // Exam schedule data
         const examSchedule = {
-            "2568-06-27": [
+            "2025-06-27": [ // Changed to C.E. year
                 { subject: "ภาษาอังกฤษ", start: "08:30", end: "09:00" },
                 { subject: "คณิตศาสตร์", start: "09:15", end: "09:45" },
                 { subject: "วิทยาศาสตร์โลกและอวกาศ", start: "10:00", end: "10:30" },
@@ -247,18 +248,18 @@
                 { subject: "ชีววิทยาเพิ่มเติม", start: "13:10", end: "13:40" },
                 { subject: "ประวัติศาสตร์", start: "14:40", end: "15:10" }
             ],
-            "2568-06-30": [
+            "2025-06-30": [ // Changed to C.E. year
                 { subject: "ภาษาไทย", start: "08:30", end: "09:00" },
                 { subject: "ฟิสิกส์เพิ่มเติม", start: "09:15", end: "09:45" },
                 { subject: "ศิลปะ", start: "10:00", end: "10:30" },
                 { subject: "สังคม", start: "10:45", end: "11:15" },
                 { subject: "วิทยาการคำนวณ", start: "13:10", end: "13:40" },
                 { subject: "เสริมทักษะคณิตศาสตร์", start: "13:55", end: "14:25" },
-                { subject: "สุขศึกษาและพลศึกษา", start: "14:40", end: "15:10" } // Updated time
+                { subject: "สุขศึกษาและพลศึกษา", start: "14:40", end: "15:10" }
             ]
         };
 
-        // For demo purposes, we'll use the current date to determine which day to show
+        // Function to update exam status and active tab
         function updateExamStatus(now) {
             const day = now.getDate();
             const month = now.getMonth() + 1; // Month is 0-indexed
@@ -270,25 +271,19 @@
             let dateKey;
             
             // This part ensures the correct tab is active based on the current date
-            if (todayFormatted === "2568-06-27") {
-                todaySchedule = examSchedule["2568-06-27"];
-                dateKey = "2568-06-27";
-                if (!document.getElementById('day1-content').classList.contains('hidden')) {
-                    document.getElementById('tab-day1').click();
-                }
-            } else if (todayFormatted === "2568-06-30") {
-                todaySchedule = examSchedule["2568-06-30"];
-                dateKey = "2568-06-30";
-                if (!document.getElementById('day2-content').classList.contains('hidden')) {
-                    document.getElementById('tab-day2').click();
-                }
+            if (todayFormatted === "2025-06-27") {
+                todaySchedule = examSchedule["2025-06-27"];
+                dateKey = "2025-06-27";
+                document.getElementById('tab-day1').click(); // Activate Day 1 tab
+            } else if (todayFormatted === "2025-06-30") {
+                todaySchedule = examSchedule["2025-06-30"];
+                dateKey = "2025-06-30";
+                document.getElementById('tab-day2').click(); // Activate Day 2 tab
             } else {
-                // Default to day 1 schedule if it's not an exam day or a future day
-                todaySchedule = examSchedule["2568-06-27"];
-                dateKey = "2568-06-27";
-                if (document.getElementById('day2-content').classList.contains('hidden') === false) {
-                    document.getElementById('tab-day1').click();
-                }
+                // If it's not an exam day, default to Day 2 (30 June 2025) as it's the more "current" of the two listed
+                todaySchedule = examSchedule["2025-06-30"];
+                dateKey = "2025-06-30";
+                document.getElementById('tab-day2').click(); // Activate Day 2 tab by default
             }
             
             const currentHour = now.getHours();
@@ -324,8 +319,7 @@
                 statusElement.textContent = `ขณะนี้กำลังสอบวิชา: ${currentExam.subject}`;
                 
                 // Highlight current exam in the table
-                // Select only exam items within the currently active day's content
-                document.querySelectorAll(`#${dateKey === '2568-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${currentExam.start}"][data-end="${currentExam.end}"]`).forEach(item => {
+                document.querySelectorAll(`#${dateKey === '2025-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${currentExam.start}"][data-end="${currentExam.end}"]`).forEach(item => {
                     item.classList.add('current-exam');
                 });
                 
@@ -333,7 +327,7 @@
                     nextExamElement.textContent = `วิชาถัดไป: ${nextExam.subject} (${nextExam.start} - ${nextExam.end})`;
                     
                     // Highlight next exam in the table
-                    document.querySelectorAll(`#${dateKey === '2568-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${nextExam.start}"][data-end="${nextExam.end}"]`).forEach(item => {
+                    document.querySelectorAll(`#${dateKey === '2025-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${nextExam.start}"][data-end="${nextExam.end}"]`).forEach(item => {
                         item.classList.add('next-exam');
                     });
                 } else {
@@ -344,7 +338,7 @@
                 nextExamElement.textContent = `วิชาถัดไป: ${nextExam.subject} (${nextExam.start} - ${nextExam.end})`;
                 
                 // Highlight next exam in the table
-                document.querySelectorAll(`#${dateKey === '2568-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${nextExam.start}"][data-end="${nextExam.end}"]`).forEach(item => {
+                document.querySelectorAll(`#${dateKey === '2025-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${nextExam.start}"][data-end="${nextExam.end}"]`).forEach(item => {
                     item.classList.add('next-exam');
                 });
             } else {
