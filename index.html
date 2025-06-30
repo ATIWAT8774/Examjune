@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -50,7 +48,6 @@
 </head>
 <body class="bg-orange-50">
     <div class="container mx-auto px-4 py-6 max-w-4xl">
-        <!-- Header -->
         <div class="bg-gradient-to-r from-orange-500 to-orange-400 rounded-lg shadow-lg p-6 mb-6 text-white">
             <h1 class="text-3xl font-bold text-center mb-2">ตารางสอบ ม.6/10</h1>
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -59,20 +56,17 @@
             </div>
         </div>
 
-        <!-- Current Status -->
         <div class="bg-white rounded-lg shadow-md p-6 mb-6 border-l-4 border-orange-500">
             <div class="text-lg font-medium mb-2">สถานะการสอบ:</div>
             <div class="text-xl font-bold mb-2" id="current-status">กำลังตรวจสอบ...</div>
             <div class="text-md" id="next-exam">กำลังตรวจสอบ...</div>
         </div>
 
-        <!-- Tab Navigation -->
         <div class="flex mb-4 border-b border-gray-200">
             <button id="tab-day1" class="px-4 py-2 font-medium text-orange-600 border-b-2 border-orange-500">27 มิถุนายน 2568</button>
             <button id="tab-day2" class="px-4 py-2 font-medium text-gray-500 hover:text-orange-500">30 มิถุนายน 2568</button>
         </div>
 
-        <!-- Day 1 Exams -->
         <div id="day1-content" class="exam-container">
             <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                 <div class="bg-orange-500 text-white px-6 py-3 font-medium text-lg">
@@ -131,21 +125,11 @@
                             </div>
                             <div class="text-orange-600 font-medium">14:40 - 15:10</div>
                         </div>
-                        <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">-.</div>
-                        <div class="exam-item p-4 hover:bg-orange-50" data-start="15:10" data-end="15:30">
-                        <div class="flex justify-between items-center">
-                            <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">-</div>
-                        <div class="exam-item p-4 hover:bg-orange-50" data-start="15:10" data-end="15:30">
-                        <div class="flex justify-between items-center">
-                            <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">-</div>
-                        <div class="exam-item p-4 hover:bg-orange-50" data-start="15:10" data-end="15:30">
-                        <div class="flex justify-between items-center">
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Day 2 Exams -->
         <div id="day2-content" class="exam-container hidden">
             <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                 <div class="bg-orange-500 text-white px-6 py-3 font-medium text-lg">
@@ -205,13 +189,13 @@
                             <div class="text-orange-600 font-medium">13:55 - 14:25</div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 35 นาที</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-start="15:00" data-end="15:30">
+                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 15 นาที</div>
+                    <div class="exam-item p-4 hover:bg-orange-50" data-start="14:40" data-end="15:10">
                         <div class="flex justify-between items-center">
                             <div>
                                 <div class="font-medium text-lg">สุขศึกษาและพลศึกษา</div>
                             </div>
-                            <div class="text-orange-600 font-medium">15:00 - 15:30</div>
+                            <div class="text-orange-600 font-medium">14:40 - 15:10</div>
                         </div>
                     </div>
                 </div>
@@ -270,51 +254,46 @@
                 { subject: "สังคม", start: "10:45", end: "11:15" },
                 { subject: "วิทยาการคำนวณ", start: "13:10", end: "13:40" },
                 { subject: "เสริมทักษะคณิตศาสตร์", start: "13:55", end: "14:25" },
-                { subject: "สุขศึกษาและพลศึกษา", start: "15:00", end: "15:30" }
+                { subject: "สุขศึกษาและพลศึกษา", start: "14:40", end: "15:10" } // Updated time
             ]
         };
 
         // For demo purposes, we'll use the current date to determine which day to show
         function updateExamStatus(now) {
-            // Convert Thai Buddhist Era to Gregorian for comparison
             const day = now.getDate();
-            const month = now.getMonth() + 1;
+            const month = now.getMonth() + 1; // Month is 0-indexed
             const year = now.getFullYear();
             
-            // Format date for lookup in examSchedule
-            const dateKey1 = "2568-06-27";
-            const dateKey2 = "2568-06-30";
+            const todayFormatted = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
             
-            // For demo purposes, we'll use the current time to determine the current exam
-            const currentHour = now.getHours();
-            const currentMinute = now.getMinutes();
-            const currentTimeString = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`;
-            
-            // Determine which day's schedule to use (for demo, we'll use the first day if it's before June 30, otherwise the second day)
             let todaySchedule;
             let dateKey;
             
-            // For demo purposes, we'll use the current date to determine which tab to show by default
-            // In a real scenario, you would compare with the actual exam dates
-            if (month === 6 && day <= 27) {
-                todaySchedule = examSchedule[dateKey1];
-                dateKey = dateKey1;
-                // Show day 1 tab
-                if (document.getElementById('day2-content').classList.contains('hidden') === false) {
+            // This part ensures the correct tab is active based on the current date
+            if (todayFormatted === "2568-06-27") {
+                todaySchedule = examSchedule["2568-06-27"];
+                dateKey = "2568-06-27";
+                if (!document.getElementById('day1-content').classList.contains('hidden')) {
                     document.getElementById('tab-day1').click();
                 }
-            } else if (month === 6 && day <= 30) {
-                todaySchedule = examSchedule[dateKey2];
-                dateKey = dateKey2;
-                // Show day 2 tab
-                if (document.getElementById('day1-content').classList.contains('hidden') === false) {
+            } else if (todayFormatted === "2568-06-30") {
+                todaySchedule = examSchedule["2568-06-30"];
+                dateKey = "2568-06-30";
+                if (!document.getElementById('day2-content').classList.contains('hidden')) {
                     document.getElementById('tab-day2').click();
                 }
             } else {
-                // If not on an exam day, default to day 1 schedule for display
-                todaySchedule = examSchedule[dateKey1];
-                dateKey = dateKey1;
+                // Default to day 1 schedule if it's not an exam day or a future day
+                todaySchedule = examSchedule["2568-06-27"];
+                dateKey = "2568-06-27";
+                if (document.getElementById('day2-content').classList.contains('hidden') === false) {
+                    document.getElementById('tab-day1').click();
+                }
             }
+            
+            const currentHour = now.getHours();
+            const currentMinute = now.getMinutes();
+            const currentTimeString = `${currentHour.toString().padStart(2, '0')}:${currentMinute.toString().padStart(2, '0')}`;
             
             // Reset all exam items
             document.querySelectorAll('.exam-item').forEach(item => {
@@ -345,7 +324,8 @@
                 statusElement.textContent = `ขณะนี้กำลังสอบวิชา: ${currentExam.subject}`;
                 
                 // Highlight current exam in the table
-                document.querySelectorAll(`.exam-item[data-start="${currentExam.start}"][data-end="${currentExam.end}"]`).forEach(item => {
+                // Select only exam items within the currently active day's content
+                document.querySelectorAll(`#${dateKey === '2568-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${currentExam.start}"][data-end="${currentExam.end}"]`).forEach(item => {
                     item.classList.add('current-exam');
                 });
                 
@@ -353,7 +333,7 @@
                     nextExamElement.textContent = `วิชาถัดไป: ${nextExam.subject} (${nextExam.start} - ${nextExam.end})`;
                     
                     // Highlight next exam in the table
-                    document.querySelectorAll(`.exam-item[data-start="${nextExam.start}"][data-end="${nextExam.end}"]`).forEach(item => {
+                    document.querySelectorAll(`#${dateKey === '2568-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${nextExam.start}"][data-end="${nextExam.end}"]`).forEach(item => {
                         item.classList.add('next-exam');
                     });
                 } else {
@@ -364,7 +344,7 @@
                 nextExamElement.textContent = `วิชาถัดไป: ${nextExam.subject} (${nextExam.start} - ${nextExam.end})`;
                 
                 // Highlight next exam in the table
-                document.querySelectorAll(`.exam-item[data-start="${nextExam.start}"][data-end="${nextExam.end}"]`).forEach(item => {
+                document.querySelectorAll(`#${dateKey === '2568-06-27' ? 'day1-content' : 'day2-content'} .exam-item[data-start="${nextExam.start}"][data-end="${nextExam.end}"]`).forEach(item => {
                     item.classList.add('next-exam');
                 });
             } else {
@@ -377,5 +357,5 @@
         updateDateTime();
         setInterval(updateDateTime, 1000);
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'956167bdb027d02e',t:'MTc1MDk5MDE5Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
