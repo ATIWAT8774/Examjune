@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ตารางสอบ ม.6/10</title>
+    <title>ตารางสอบ ม.6/10 - 9 ม.ค. 69</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -26,23 +26,21 @@
             border-radius: 20px;
         }
         .current-exam {
-            background-color: #FF9B50;
-            color: white;
+            background-color: #FF9B50 !important;
+            color: white !important;
             animation: pulse 2s infinite;
         }
+        .current-exam .text-orange-600 {
+            color: white !important;
+        }
         @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 155, 80, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 155, 80, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 155, 80, 0);
-            }
+            0% { box-shadow: 0 0 0 0 rgba(255, 155, 80, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 155, 80, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 155, 80, 0); }
         }
         .next-exam {
             border: 2px dashed #FF9B50;
+            background-color: #fffaf0;
         }
     </style>
 </head>
@@ -59,103 +57,63 @@
         <div class="bg-white rounded-lg shadow-md p-6 mb-6 border-l-4 border-orange-500">
             <div class="text-lg font-medium mb-2">สถานะการสอบ:</div>
             <div class="text-xl font-bold mb-2" id="current-status">กำลังตรวจสอบ...</div>
-            <div class="text-md" id="next-exam">กำลังตรวจสอบ...</div>
+            <div class="text-md" id="next-exam-info">กำลังตรวจสอบ...</div>
         </div>
 
         <div class="flex mb-4 border-b border-gray-200">
-            <button id="tab-day1" class="px-4 py-2 font-medium text-gray-500 hover:text-orange-500">30 กรกฎาคม 2025</button>
-            <button id="tab-day2" class="px-4 py-2 font-medium text-gray-500 hover:text-orange-500">31 กรกฎาคม 2025</button>
+            <button id="tab-day1" class="px-4 py-2 font-medium text-orange-600 border-b-2 border-orange-500">9 มกราคม 2569</button>
         </div>
 
-        <div id="day1-content" class="exam-container hidden">
+        <div id="day1-content" class="exam-container">
             <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
                 <div class="bg-orange-500 text-white px-6 py-3 font-medium text-lg">
-                    วันพุธ 30 กรกฎาคม 2025
+                    วันศุกร์ที่ 9 มกราคม 2569
                 </div>
-                <div class="divide-y divide-gray-100">
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-30" data-start="08:30" data-end="09:00">
+                <div class="divide-y divide-gray-100" id="schedule-list">
+                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2026-01-09" data-start="08:30" data-end="09:10">
                         <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">ภาษาไทย</div></div>
-                            <div class="text-orange-600 font-medium">08:30 - 09:00</div>
+                            <div class="font-medium text-lg">คณิตศาสตร์ 6</div>
+                            <div class="text-orange-600 font-medium">08:30 - 09:10</div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 15 นาที</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-30" data-start="09:15" data-end="09:45">
+                    <div class="p-2 bg-gray-50 text-xs text-gray-500 text-center italic">พัก 15 นาที</div>
+                    
+                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2026-01-09" data-start="09:25" data-end="10:05">
                         <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">ฟิสิกส์</div></div>
-                            <div class="text-orange-600 font-medium">09:15 - 09:45</div>
+                            <div class="font-medium text-lg">เคมีเพิ่มเติม 6</div>
+                            <div class="text-orange-600 font-medium">09:25 - 10:05</div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 15 นาที</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-30" data-start="10:00" data-end="10:30">
-                        <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">วิทยาศาสตร์โลกและอวกาศ</div></div>
-                            <div class="text-orange-600 font-medium">10:00 - 10:30</div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พักกลางวัน</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-30" data-start="13:10" data-end="13:40">
-                        <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">วิทยาการคำนวณ</div></div>
-                            <div class="text-orange-600 font-medium">13:10 - 13:40</div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 15 นาที</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-30" data-start="13:55" data-end="14:25">
-                        <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">เสริมทักษะคณิตศาสตร์</div></div>
-                            <div class="text-orange-600 font-medium">13:55 - 14:25</div>
-                        </div>
-                    </div>
-                     <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 15 นาที</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-30" data-start="14:40" data-end="15:10">
-                        <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">ประวัติศาสตร์</div></div>
-                            <div class="text-orange-600 font-medium">14:40 - 15:10</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <div class="p-2 bg-gray-50 text-xs text-gray-500 text-center italic">พัก 15 นาที</div>
 
-        <div id="day2-content" class="exam-container hidden">
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
-                <div class="bg-orange-500 text-white px-6 py-3 font-medium text-lg">
-                    วันพฤหัสบดี 31 กรกฎาคม 2025
-                </div>
-                <div class="divide-y divide-gray-100">
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-31" data-start="10:00" data-end="10:30">
+                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2026-01-09" data-start="10:20" data-end="11:00">
                         <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">ภาษาอังกฤษ</div></div>
-                            <div class="text-orange-600 font-medium">10:00 - 10:30</div>
+                            <div class="font-medium text-lg">สถิติในชีวิตประจำวัน</div>
+                            <div class="text-orange-600 font-medium">10:20 - 11:00</div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 45 นาที</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-31" data-start="11:15" data-end="11:45">
+                    <div class="p-2 bg-gray-50 text-xs text-gray-500 text-center italic">พัก 10 นาที</div>
+
+                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2026-01-09" data-start="11:10" data-end="11:50">
                         <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">คณิตศาสตร์</div></div>
-                            <div class="text-orange-600 font-medium">11:15 - 11:45</div>
+                            <div class="font-medium text-lg">ภาษาอังกฤษ</div>
+                            <div class="text-orange-600 font-medium">11:10 - 11:50</div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พักกลางวัน</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-31" data-start="13:10" data-end="13:40">
+                    <div class="p-3 bg-gray-100 text-sm text-gray-600 font-bold text-center">พักกลางวัน</div>
+
+                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2026-01-09" data-start="13:30" data-end="14:10">
                         <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">เคมีเพิ่มเติม</div></div>
-                            <div class="text-orange-600 font-medium">13:10 - 13:40</div>
+                            <div class="font-medium text-lg">ชีววิทยาเพิ่มเติม 6</div>
+                            <div class="text-orange-600 font-medium">13:30 - 14:10</div>
                         </div>
                     </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 15 นาที</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-31" data-start="13:55" data-end="14:25">
+                    <div class="p-2 bg-gray-50 text-xs text-gray-500 text-center italic">พัก 15 นาที</div>
+
+                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2026-01-09" data-start="14:30" data-end="15:10">
                         <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">ชีววิทยาเพิ่มเติม</div></div>
-                            <div class="text-orange-600 font-medium">13:55 - 14:25</div>
-                        </div>
-                    </div>
-                    <div class="p-3 bg-gray-50 text-sm text-gray-500 text-center">พัก 15 นาที</div>
-                    <div class="exam-item p-4 hover:bg-orange-50" data-date="2025-07-31" data-start="14:40" data-end="15:10">
-                        <div class="flex justify-between items-center">
-                            <div><div class="font-medium text-lg">สังคมศึกษา</div></div>
-                            <div class="text-orange-600 font-medium">14:40 - 15:10</div>
+                            <div class="font-medium text-lg">สังคมศึกษา</div>
+                            <div class="text-orange-600 font-medium">14:30 - 15:10</div>
                         </div>
                     </div>
                 </div>
@@ -164,41 +122,10 @@
     </div>
 
     <script>
-        const tabDay1 = document.getElementById('tab-day1');
-        const tabDay2 = document.getElementById('tab-day2');
-        const contentDay1 = document.getElementById('day1-content');
-        const contentDay2 = document.getElementById('day2-content');
-
-        function setActiveTab(activeTab) {
-            const tabs = [tabDay1, tabDay2];
-            const contents = [contentDay1, contentDay2];
-            
-            tabs.forEach(tab => {
-                tab.classList.remove('text-orange-600', 'border-b-2', 'border-orange-500');
-                tab.classList.add('text-gray-500');
-            });
-            
-            contents.forEach(content => content.classList.add('hidden'));
-
-            if (activeTab === 1) {
-                tabDay1.classList.add('text-orange-600', 'border-b-2', 'border-orange-500');
-                tabDay1.classList.remove('text-gray-500');
-                contentDay1.classList.remove('hidden');
-            } else if (activeTab === 2) {
-                tabDay2.classList.add('text-orange-600', 'border-b-2', 'border-orange-500');
-                tabDay2.classList.remove('text-gray-500');
-                contentDay2.classList.remove('hidden');
-            }
-        }
-
-        tabDay1.addEventListener('click', () => setActiveTab(1));
-        tabDay2.addEventListener('click', () => setActiveTab(2));
-
-        // Date and time functions
         function updateDateTime() {
             const now = new Date();
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('current-date').textContent = now.toLocaleDateString('th-TH-u-nu-latn', options);
+            document.getElementById('current-date').textContent = now.toLocaleDateString('th-TH', options);
             
             const hours = now.getHours().toString().padStart(2, '0');
             const minutes = now.getMinutes().toString().padStart(2, '0');
@@ -208,72 +135,43 @@
             updateExamStatus(now);
         }
 
-        // Exam schedule data
         const examSchedule = {
-            "2025-07-30": [
-                { subject: "ภาษาไทย", start: "08:30", end: "09:00" },
-                { subject: "ฟิสิกส์", start: "09:15", end: "09:45" },
-                { subject: "วิทยาศาสตร์โลกและอวกาศ", start: "10:00", end: "10:30" },
-                { subject: "วิทยาการคำนวณ", start: "13:10", end: "13:40" },
-                { subject: "เสริมทักษะคณิตศาสตร์", start: "13:55", end: "14:25" },
-                { subject: "ประวัติศาสตร์", start: "14:40", end: "15:10" }
-            ],
-            "2025-07-31": [
-                { subject: "ภาษาอังกฤษ", start: "10:00", end: "10:30" },
-                { subject: "คณิตศาสตร์", start: "11:15", end: "11:45" },
-                { subject: "เคมีเพิ่มเติม", start: "13:10", end: "13:40" },
-                { subject: "ชีววิทยาเพิ่มเติม", start: "13:55", end: "14:25" },
-                { subject: "สังคมศึกษา", start: "14:40", end: "15:10" }
+            "2026-01-09": [
+                { subject: "คณิตศาสตร์ 6", start: "08:30", end: "09:10" },
+                { subject: "เคมีเพิ่มเติม 6", start: "09:25", end: "10:05" },
+                { subject: "สถิติในชีวิตประจำวัน", start: "10:20", end: "11:00" },
+                { subject: "ภาษาอังกฤษ", start: "11:10", end: "11:50" },
+                { subject: "ชีววิทยาเพิ่มเติม 6", start: "13:30", end: "14:10" },
+                { subject: "สังคมศึกษา", start: "14:30", end: "15:10" }
             ]
         };
 
-        // Function to update exam status and active tab
-        let initialLoad = true;
         function updateExamStatus(now) {
             const year = now.getFullYear();
             const month = (now.getMonth() + 1).toString().padStart(2, '0');
             const day = now.getDate().toString().padStart(2, '0');
             const todayFormatted = `${year}-${month}-${day}`;
             
-            let todaySchedule = examSchedule[todayFormatted];
-            let dateKey = todayFormatted;
+            const todaySchedule = examSchedule[todayFormatted];
+            const statusElement = document.getElementById('current-status');
+            const nextExamElement = document.getElementById('next-exam-info');
 
-            if (initialLoad) {
-                if (todayFormatted === "2025-07-30") {
-                    setActiveTab(1);
-                } else if (todayFormatted === "2025-07-31") {
-                    setActiveTab(2);
-                } else {
-                    // Default to the first tab if not an exam day
-                    setActiveTab(1);
-                    // On non-exam days, we can show status relative to the first exam day
-                    todaySchedule = examSchedule["2025-07-30"];
-                    dateKey = "2025-07-30";
-                }
-                initialLoad = false;
-            }
-            
-            // If it's not an exam day, don't proceed with status updates
-            if (!examSchedule[todayFormatted]) {
-                 document.getElementById('current-status').textContent = "วันนี้ไม่มีการสอบ";
-                 document.getElementById('next-exam').textContent = "โปรดดูตารางสอบในแท็บถัดไป";
-                 // Clear highlights
-                 document.querySelectorAll('.exam-item').forEach(item => {
-                    item.classList.remove('current-exam', 'next-exam');
-                });
-                 return;
-            }
-
-            const currentTimeString = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-
-            // Reset highlights for the current day
-            document.querySelectorAll(`.exam-item[data-date="${dateKey}"]`).forEach(item => {
+            // Reset classes
+            document.querySelectorAll('.exam-item').forEach(item => {
                 item.classList.remove('current-exam', 'next-exam');
             });
+
+            if (!todaySchedule) {
+                statusElement.textContent = "วันนี้ไม่มีการสอบ";
+                nextExamElement.textContent = "กรุณาตรวจสอบตารางสอบวันถัดไป";
+                return;
+            }
+
+            const currentTimeString = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
             
             let currentExam = null;
             let nextExam = null;
-            
+
             for (let i = 0; i < todaySchedule.length; i++) {
                 const exam = todaySchedule[i];
                 if (currentTimeString >= exam.start && currentTimeString < exam.end) {
@@ -285,33 +183,32 @@
                     break;
                 }
             }
-            
-            const statusElement = document.getElementById('current-status');
-            const nextExamElement = document.getElementById('next-exam');
-            
+
             if (currentExam) {
-                statusElement.textContent = `ขณะนี้กำลังสอบวิชา: ${currentExam.subject}`;
-                document.querySelector(`.exam-item[data-start="${currentExam.start}"]`).classList.add('current-exam');
+                statusElement.textContent = `ขณะนี้กำลังสอบ: ${currentExam.subject}`;
+                const element = document.querySelector(`.exam-item[data-start="${currentExam.start}"]`);
+                if (element) element.classList.add('current-exam');
                 
                 if (nextExam) {
                     nextExamElement.textContent = `วิชาถัดไป: ${nextExam.subject} (${nextExam.start} - ${nextExam.end})`;
-                    document.querySelector(`.exam-item[data-start="${nextExam.start}"]`).classList.add('next-exam');
+                    const nextElement = document.querySelector(`.exam-item[data-start="${nextExam.start}"]`);
+                    if (nextElement) nextElement.classList.add('next-exam');
                 } else {
-                    nextExamElement.textContent = "ไม่มีการสอบถัดไปในวันนี้";
+                    nextExamElement.textContent = "วิชาสุดท้ายของวันนี้";
                 }
             } else if (nextExam) {
                 statusElement.textContent = "ขณะนี้เป็นเวลาพัก";
                 nextExamElement.textContent = `วิชาถัดไป: ${nextExam.subject} (${nextExam.start} - ${nextExam.end})`;
-                document.querySelector(`.exam-item[data-start="${nextExam.start}"]`).classList.add('next-exam');
+                const nextElement = document.querySelector(`.exam-item[data-start="${nextExam.start}"]`);
+                if (nextElement) nextElement.classList.add('next-exam');
             } else {
                 statusElement.textContent = "การสอบสำหรับวันนี้สิ้นสุดแล้ว";
-                nextExamElement.textContent = "ขอให้โชคดีกับการสอบในวันถัดไป!";
+                nextExamElement.textContent = "ขอให้โชคดีกับการประกาศผลสอบ!";
             }
         }
 
-        // Initialize and update every second
-        updateDateTime();
         setInterval(updateDateTime, 1000);
+        updateDateTime();
     </script>
 </body>
 </html>
